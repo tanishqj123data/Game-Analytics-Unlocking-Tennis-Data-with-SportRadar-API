@@ -163,8 +163,11 @@ elif menu == "Players by Country":
     col5.metric("Average Points", round(summary_df['avg_points'][0], 2))
 
     # Only show positive movement for "Most Improved"
-    if summary_df['highest_movement'][0] > 0:
-        col6.metric("Most Improved", summary_df['top_mover'][0], f"+{int(summary_df['highest_movement'][0])}")
+    highest_movement = summary_df['highest_movement'][0]
+    top_mover = summary_df['top_mover'][0]
+
+    if pd.notna(highest_movement) and highest_movement > 0:
+        col6.metric("Most Improved", top_mover, f"+{int(highest_movement)}")
     else:
         col6.metric("Most Improved", "No Data", "N/A")
 
